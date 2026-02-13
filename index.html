@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --color-text-white:#ffffff;
+    --color-text-pink:#ff6f91;
+    --color-outline:#333333;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffb6c1,#ffc3da);
+    overflow:hidden;
+}
+
+/* ================= INTRO ================= */
+.intro{
+    position:absolute;
+    text-align:center;
+    font-family:'Baloo 2', cursive;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.intro span{
+    display:block;
+    font-size:100px;
+    transform:translateY(100px);
+    opacity:0;
+    animation:txtTranslateY 1s forwards;
+    z-index:2;
+}
+
+.intro .happy{
+    color:var(--color-text-white);
+    -webkit-text-stroke:4px var(--color-outline);
+    text-shadow:6px 6px 0 var(--color-outline);
+    animation-delay:0.3s;
+}
+
+.intro .valentine{
+    color:var(--color-text-pink);
+    -webkit-text-stroke:4px var(--color-outline);
+    text-shadow:6px 6px 0 var(--color-outline);
+    animation-delay:0.8s;
+}
+
+@keyframes txtTranslateY{
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+/* ================= BUBBLES CHỈ Ở INTRO ================= */
+.intro .bubbles{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.intro .bubbles span{
+    position:absolute;
+    bottom:-120px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.4);
+    animation:floatUp linear infinite;
+}
+
+.intro .bubbles span.heart{
+    background:none;
+    font-size:28px;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:0.8;
+    }
+    100%{
+        transform:translateY(-120vh) scale(1.8);
+        opacity:0;
+    }
+}
+
+/* ================= BOOK ================= */
+.book{
+    width:900px;
+    height:500px;
+    display:none;
+    border:6px solid #ff69b4;
+    border-radius:50px;
+    overflow:hidden;
+    box-shadow:0 0 40px rgba(255,105,180,0.6);
+    background:white;
+}
+
+.page{
+    width:100%;
+    height:100%;
+    display:flex;
+    transition:transform 0.6s ease;
+}
+
+.slide{
+    transform:translateX(-100%);
+}
+
+.left-page{
+    width:50%;
+    background:#ffe4ec;
+    overflow:hidden;
+}
+
+.left-page img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.right-page{
+    width:50%;
+    background:#ffccdd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.right-page p{
+    font-family:'Segoe UI', sans-serif;
+    font-size:22px;
+    color:#c2185b;
+    line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+
+    <!-- Bong bóng + tim chỉ ở đây -->
+    <div class="bubbles">
+        <span style="left:5%; width:20px; height:20px; animation-duration:12s;"></span>
+        <span style="left:15%; width:35px; height:35px; animation-duration:18s;"></span>
+        <span style="left:25%; width:15px; height:15px; animation-duration:10s;"></span>
+        <span style="left:35%; width:40px; height:40px; animation-duration:22s;"></span>
+        <span style="left:45%; width:25px; height:25px; animation-duration:14s;"></span>
+        <span class="heart" style="left:10%; animation-duration:5s;">💖</span>
+        <span class="heart" style="left:30%; animation-duration:10s;">💕</span>
+        <span class="heart" style="left:50%; animation-duration:6s;">💗</span>
+        <span class="heart" style="left:70%; animation-duration:8s;">💘</span>
+        <span class="heart" style="left:90%; animation-duration:3s;">💞</span>
+    
+    </div>
+
+    <span class="happy">HAPPY</span>
+    <span class="valentine">VALENTINE DAY</span>
+</div>
+
+<!-- BOOK -->
+<div class="book" id="book">
+    <div class="page" id="page">
+        <div class="left-page">
+            <img id="bookImage" src="1.jpg">
+        </div>
+        <div class="right-page" onclick="nextPage()">
+            <p id="bookText">Helooo tình yêu cụa em nhaaaa!!! Nếu anh đang đọc cái này chắc là đang nhớ em rùi nhỉ "Hihihiii"💕 E hèmmm, Hôm nay là Valentien đầu tiên của hai chúng ta, em có vài lời muốn gửi đến anh. Ừm ừm, cho anh ó - My Girlfriend 💗</p>
+        </div>
+    </div>
+</div>
+
+<script>
+setTimeout(()=>{
+    document.getElementById("intro").style.display="none";
+    document.getElementById("book").style.display="flex";
+},6000);
+
+const pages = [
+    { img: "1.jpg", text: "Valentine mà phải yêu xa thì hơi buồn, nhưng hỏng sao đâu nha, mấy năm sau mình đón cùng nhau là được. Hy vọng mình có thể đón nhiều năm sau năm sau nữa. Em rất muốn nghe câu Happy Valentine cục cưng nhaaaa của anh đó nhaaaa💖" },  
+    { img: "3.jpg", text: "Em đã nói với anh rất nhiều lần rùi là: Anh cười lên nhìn xinh và dễ thương lắm (hehehehe). Đặc biệt hơn khi anh cười với em chớ. Em thích cảm giác anh làm nũng rùi bám dính lấy em. Cảm giác thích lắm luôn ó. Nên mong anh bám em nhiều hơn nhaaaaaa❤️" },
+     { img: "2.jpg", text: "Năm tới mong mình có thể yêu nhau nhiều nhiều hơn hơn nữa. Hy vọng ta sẽ có nhiều kỉ niệm đẹp với nhau hơn nữa. Không mong gì ngoài cả hai cùng vui vẻ và hạnh phúc (Hí hí híiiiiii)💕" },
+    { img: "4.jpg", text: "Hy vọng Valentine của em sẽ luôn vui vẻ, hạnh phúc, có một ngày tuyệt vời nhaaa. Moah Moah Moahhhhh~~~" },
+    { img: "5.jpg", text: "Bên nhau lâu dài nhất có thể nhé. Em yêu anh - Valentine của em 💞" }
+];
+
+let current = 0;
+
+function nextPage(){
+    const page = document.getElementById("page");
+    page.classList.add("slide");
+
+    setTimeout(()=>{
+        current++;
+        if(current >= pages.length) current = 0;
+
+        document.getElementById("bookImage").src = pages[current].img;
+        document.getElementById("bookText").innerText = pages[current].text;
+
+        page.classList.remove("slide");
+    },600);
+}
+</script>
+
+</body>
+</html>
