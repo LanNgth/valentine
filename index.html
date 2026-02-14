@@ -72,28 +72,21 @@ body{
     }
 }
 
-/* ================= BUBBLES CHỈ Ở INTRO ================= */
-.intro .bubbles{
+/* ================= HEARTS ================= */
+.bubbles{
     position:absolute;
     width:100%;
     height:100%;
-    top:0;
-    left:0;
     overflow:hidden;
     pointer-events:none;
 }
 
-.intro .bubbles span{
+.bubbles span{
     position:absolute;
     bottom:-120px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.4);
+    font-size:25px;
     animation:floatUp linear infinite;
-}
-
-.intro .bubbles span.heart{
-    background:none;
-    font-size:28px;
+    opacity:0.8;
 }
 
 @keyframes floatUp{
@@ -112,28 +105,22 @@ body{
     width:900px;
     height:500px;
     display:none;
-    border:6px solid #ff69b4;
-    border-radius:50px;
-    overflow:hidden;
-    box-shadow:0 0 40px rgba(255,105,180,0.6);
-    background:white;
+    perspective:2000px;
 }
 
 .page{
     width:100%;
     height:100%;
     display:flex;
-    transition:transform 0.6s ease;
+    box-shadow:0 30px 60px rgba(0,0,0,0.4);
+    border-radius:20px;
+    overflow:hidden;
 }
 
-.slide{
-    transform:translateX(-100%);
-}
-
+/* LEFT */
 .left-page{
     width:50%;
     background:#ffe4ec;
-    overflow:hidden;
 }
 
 .left-page img{
@@ -142,6 +129,7 @@ body{
     object-fit:cover;
 }
 
+/* RIGHT */
 .right-page{
     width:50%;
     background:#ffccdd;
@@ -151,6 +139,15 @@ body{
     padding:40px;
     text-align:center;
     cursor:pointer;
+
+    transform-origin:left;
+    transform-style:preserve-3d;
+    transition:transform 0.8s cubic-bezier(.22,.61,.36,1);
+    backface-visibility:hidden;
+}
+
+.right-page.flipping{
+    transform:rotateY(-180deg);
 }
 
 .right-page p{
@@ -167,19 +164,12 @@ body{
 <!-- INTRO -->
 <div class="intro" id="intro">
 
-    <!-- Bong bóng + tim chỉ ở đây -->
     <div class="bubbles">
-        <span style="left:5%; width:20px; height:20px; animation-duration:12s;"></span>
-        <span style="left:15%; width:35px; height:35px; animation-duration:18s;"></span>
-        <span style="left:25%; width:15px; height:15px; animation-duration:10s;"></span>
-        <span style="left:35%; width:40px; height:40px; animation-duration:22s;"></span>
-        <span style="left:45%; width:25px; height:25px; animation-duration:14s;"></span>
-        <span class="heart" style="left:10%; animation-duration:5s;">💖</span>
-        <span class="heart" style="left:30%; animation-duration:10s;">💕</span>
-        <span class="heart" style="left:50%; animation-duration:6s;">💗</span>
-        <span class="heart" style="left:70%; animation-duration:8s;">💘</span>
-        <span class="heart" style="left:90%; animation-duration:3s;">💞</span>
-    
+        <span style="left:10%; animation-duration:6s;">💖</span>
+        <span style="left:25%; animation-duration:8s;">💕</span>
+        <span style="left:40%; animation-duration:5s;">💗</span>
+        <span style="left:60%; animation-duration:7s;">💘</span>
+        <span style="left:80%; animation-duration:4s;">💞</span>
     </div>
 
     <span class="happy">HAPPY</span>
@@ -188,46 +178,70 @@ body{
 
 <!-- BOOK -->
 <div class="book" id="book">
-    <div class="page" id="page">
+    <div class="page">
+
         <div class="left-page">
             <img id="bookImage" src="1.jpg">
         </div>
-        <div class="right-page" onclick="nextPage()">
-            <p id="bookText">Helooo tình yêu cụa em nhaaaa!!! Nếu anh đang đọc cái này chắc là đang nhớ em rùi nhỉ "Hihihiii"💕 E hèmmm, Hôm nay là Valentien đầu tiên của hai chúng ta, em có vài lời muốn gửi đến anh. Ừm ừm, cho anh ó - My Girlfriend 💗</p>
+
+        <div class="right-page" id="rightPage">
+            <p id="bookText">
+                Helooo tình yêu cụa em nhaaaa!!! Nếu anh đang đọc cái này chắc là đang nhớ em rùi nhỉ 💕
+            </p>
         </div>
+
     </div>
 </div>
 
 <script>
+
 setTimeout(()=>{
     document.getElementById("intro").style.display="none";
-    document.getElementById("book").style.display="flex";
+    document.getElementById("book").style.display="block";
 },6000);
 
 const pages = [
     { img: "1.jpg", text: "Valentine mà phải yêu xa thì hơi buồn, nhưng hỏng sao đâu nha, mấy năm sau mình đón cùng nhau là được. Hy vọng mình có thể đón nhiều năm sau năm sau nữa. Em rất muốn nghe câu Happy Valentine cục cưng nhaaaa của anh đó nhaaaa💖" },  
-    { img: "3.jpg", text: "Em đã nói với anh rất nhiều lần rùi là: Anh cười lên nhìn xinh và dễ thương lắm (hehehehe). Đặc biệt hơn khi anh cười với em chớ. Em thích cảm giác anh làm nũng rùi bám dính lấy em. Cảm giác thích lắm luôn ó. Nên mong anh bám em nhiều hơn nhaaaaaa❤️" },
-     { img: "2.jpg", text: "Năm tới mong mình có thể yêu nhau nhiều nhiều hơn hơn nữa. Hy vọng ta sẽ có nhiều kỉ niệm đẹp với nhau hơn nữa. Không mong gì ngoài cả hai cùng vui vẻ và hạnh phúc (Hí hí híiiiiii)💕" },
-    { img: "4.jpg", text: "Hy vọng Valentine của em sẽ luôn vui vẻ, hạnh phúc, có một ngày tuyệt vời nhaaa. Moah Moah Moahhhhh~~~" },
+    { img: "3.jpg", text: "Em đã nói với anh rất nhiều lần rùi là: Anh cười lên nhìn xinh và dễ thương lắm (hehehehe). Đặc biệt hơn khi anh cười với em chớ. Ý của em là em muốn anh mãi vui vẻ, hạnh phúc thuiii. Mà em đặc biệt thích cảm giác anh làm nũng rùi bám dính lấy em. Cảm giác thích lắm luôn ó. Nên mong anh bám em nhiều hơn nhaaaaaa❤️" },
+    { img: "2.jpg", text: "Năm tới mong mình có thể yêu nhau nhiều nhiều hơn hơn nữaaaa. Hy vọng ta sẽ có nhiều kỉ niệm đẹp với nhau hơn nữa. Không mong gì ngoài cả hai cùng vui vẻ và hạnh phúc (Hí hí híiiiiii). Cảm ơn anh đã đến và yêu em nhaaaaa!!!💕" },
+    { img: "4.jpg", text: "Hy vọng Valentine của em sẽ luôn vui vẻ, hạnh phúc, có một ngày tuyệt vời nhaaa.💕 Moah Moah Moahhhhh~~~" },
     { img: "5.jpg", text: "Bên nhau lâu dài nhất có thể nhé. Em yêu anh - Valentine của em 💞" }
 ];
 
 let current = 0;
+let isFlipping = false;
 
-function nextPage(){
-    const page = document.getElementById("page");
-    page.classList.add("slide");
+const rightPage = document.getElementById("rightPage");
 
-    setTimeout(()=>{
-        current++;
-        if(current >= pages.length) current = 0;
+rightPage.addEventListener("click", ()=>{
 
-        document.getElementById("bookImage").src = pages[current].img;
-        document.getElementById("bookText").innerText = pages[current].text;
+    if(isFlipping) return;
+    isFlipping = true;
 
-        page.classList.remove("slide");
-    },600);
-}
+    rightPage.classList.add("flipping");
+});
+
+/* Bắt đúng thời điểm lật xong */
+rightPage.addEventListener("transitionend", ()=>{
+
+    if(!isFlipping) return;
+
+    current++;
+    if(current >= pages.length) current = 0;
+
+    document.getElementById("bookImage").src = pages[current].img;
+    document.getElementById("bookText").innerText = pages[current].text;
+
+    /* reset ngay không giật */
+    rightPage.style.transition = "none";
+    rightPage.classList.remove("flipping");
+
+    void rightPage.offsetWidth; // reflow
+
+    rightPage.style.transition = "transform 0.8s cubic-bezier(.22,.61,.36,1)";
+    isFlipping = false;
+});
+
 </script>
 
 </body>
